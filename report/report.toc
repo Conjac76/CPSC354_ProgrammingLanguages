@@ -2,3 +2,8 @@
 \contentsline {subsubsection}{Mathematical Proof}{3}{section*.2}%
 \contentsline {subsubsection}{Proof in Lean}{3}{section*.3}%
 \contentsline {subsubsection}{Connection Between Lean and Mathematics}{3}{section*.4}%
+\contentsline {subsection}{Answers to 5-8}{3}{section*.5}%
+\contentsline {subsubsection}{Level 5}{3}{section*.6}%
+\contentsline {subsubsection}{Level 6}{3}{section*.7}%
+\contentsline {subsubsection}{Level 7}{3}{section*.8}%
+\contentsline {subsubsection}{Level 8}{4}{section*.9}%

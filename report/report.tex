@@ -43,4 +43,51 @@ In mathematics, we rely on the axiom of reflexivity to assert that $37x + q = 37
 
 Thus, both in Lean and in traditional mathematics, the proof of $37x + q = 37x + q$ is an application of the same fundamental concept: the reflexivity of equality.
 
+\subsection*{Answers to 5-8}
+\addcontentsline{toc}{subsection}{Answers to 5-8}
+
+\subsubsection*{Level 5}
+\addcontentsline{toc}{subsubsection}{Level 5}
+
+\begin{verbatim}
+rw [add_zero]
+rw [add_zero]
+rfl
+\end{verbatim}
+
+\subsubsection*{Level 6}
+\addcontentsline{toc}{subsubsection}{Level 6}
+
+\begin{verbatim}
+rw [add_zero c]
+rw [add_zero b]
+rfl
+\end{verbatim}
+
+\subsubsection*{Level 7}
+\addcontentsline{toc}{subsubsection}{Level 7}
+
+\begin{verbatim}
+rw [one_eq_succ_zero]
+rw [add_succ]
+rw [add_zero]
+rfl
+\end{verbatim}
+
+\subsubsection*{Level 8}
+\addcontentsline{toc}{subsubsection}{Level 8}
+
+\begin{verbatim}
+rw [two_eq_succ_one]
+rw [one_eq_succ_zero]
+rw [four_eq_succ_three]
+rw [three_eq_succ_two]
+rw [two_eq_succ_one]
+rw [one_eq_succ_zero]
+rw [add_succ]
+rw [add_succ]
+rw [add_zero]
+rfl
+\end{verbatim}
+
 \end{document}
