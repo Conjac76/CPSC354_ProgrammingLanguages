@@ -1,0 +1,165 @@
+\documentclass{article}
+
+\usepackage{tikz} 
+\usetikzlibrary{automata, positioning, arrows} 
+
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage{parskip}
+\usepackage{hyperref}
+  \hypersetup{
+    colorlinks = true,
+    urlcolor = blue,       % color of external links using \href
+    linkcolor= blue,       % color of internal links 
+    citecolor= blue,       % color of links to bibliography
+    filecolor= blue,        % color of file links
+    }
+    
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\newtheoremstyle{theorem}
+  {\topsep}   % ABOVESPACE
+  {\topsep}   % BELOWSPACE
+  {\itshape\/}  % BODYFONT
+  {0pt}       % INDENT (empty value is the same as 0pt)
+  {\bfseries} % HEADFONT
+  {.}         % HEADPUNCT
+  {5pt plus 1pt minus 1pt} % HEADSPACE
+  {}          % CUSTOM-HEAD-SPEC
+\theoremstyle{theorem} 
+   \newtheorem{theorem}{Theorem}[section]
+   \newtheorem{corollary}[theorem]{Corollary}
+   \newtheorem{lemma}[theorem]{Lemma}
+   \newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+   \newtheorem{definition}[theorem]{Definition}
+   \newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}    
+  \newtheorem{remark}[theorem]{Remark}
+
+\title{CPSC-354 Report}
+\author{Connor Jacobs \\ Chapman University}
+
+\date{\today} 
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report will contain a summary of my learning progress throughout the course, so far including: lean proofs
+\end{abstract}
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+\section{Introduction}\label{intro}
+
+This report will document my learning through the course. The content will be structured week by week, with sections on mathematical notes, homework solutions, and personal reflections on the topics discussed.
+
+\section{Week by Week}\label{homework}
+
+\subsection{Week 1}
+
+\subsubsection*{Mathematical Proof}
+
+Proving that $37x + q = 37x + q$ demonstrates the reflexivity property of equality. Reflexivity states that any mathematical expression is equal to itself. In this case, the expression $37x + q$ is compared to itself, and it is immediately clear by the reflexivity of equality that this statement is true.
+
+\subsubsection*{Proof in Lean}
+
+In Lean, the theorem $37x + q = 37x + q$ is proven using the `rfl` tactic. The `rfl` tactic in Lean stands for "reflexivity" and handles proofs of the form $X = X$. When `rfl` is executed, Lean verifies that both sides of the equation are equal and the proof is complete.
+
+The command to execute in Lean is simply:
+\begin{verbatim}
+rfl
+\end{verbatim}
+
+\subsubsection*{Connection Between Lean and Mathematics}
+
+In mathematics, we rely on the axiom of reflexivity to assert that $37x + q = 37x + q$. Likewise, in Lean, the `rfl` tactic automates this process by invoking the same principle. The use of `rfl` in Lean serves as a direct representation of reflexivity in mathematical logic, providing an automated and formalized way to conclude that an expression is equal to itself.
+
+Thus, both in Lean and in traditional mathematics, the proof of $37x + q = 37x + q$ is an application of the same fundamental concept: the reflexivity of equality.
+
+\subsection{Answers to 5-8}
+
+\subsubsection*{Level 5}
+
+\begin{verbatim}
+rw [add_zero]
+rw [add_zero]
+rfl
+\end{verbatim}
+
+\subsubsection*{Level 6}
+
+\begin{verbatim}
+rw [add_zero c]
+rw [add_zero b]
+rfl
+\end{verbatim}
+
+\subsubsection*{Level 7}
+
+\begin{verbatim}
+rw [one_eq_succ_zero]
+rw [add_succ]
+rw [add_zero]
+rfl
+\end{verbatim}
+
+\subsubsection*{Level 8}
+
+\begin{verbatim}
+rw [two_eq_succ_one]
+rw [one_eq_succ_zero]
+rw [four_eq_succ_three]
+rw [three_eq_succ_two]
+rw [two_eq_succ_one]
+rw [one_eq_succ_zero]
+rw [add_succ]
+rw [add_succ]
+rw [add_zero]
+rfl
+\end{verbatim}
+
+\section{Lessons from the Assignments}
+
+\subsection{Key Lessons}
+
+This assignment reinforced the importance of foundational properties in mathematics, like reflexivity, commutativity, and associativity, and their version in Lean. Lean's tactics such as `rfl` and `rw` simplify proofs by automating logical steps, allowing for verification of mathematical statements.
+
+
+\section{Conclusion}\label{conclusion}
+
+The first assignment provided insight into the mathematics and computational logic, and teaching me how to verify simple proofs in Lean.
+
+\begin{thebibliography}{99}
+\bibitem[BLA] Author, Title, Publisher, Year
+\end{thebibliography}
+
+\end{document}
