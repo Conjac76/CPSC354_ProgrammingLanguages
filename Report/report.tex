@@ -18,7 +18,7 @@
     citecolor= blue,       % color of links to bibliography
     filecolor= blue,        % color of file links
     }
-    
+
 \usepackage{listings}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -39,7 +39,8 @@
   stringstyle=\color{mauve},
   breaklines=true,
   breakatwhitespace=true,
-  tabsize=3
+  tabsize=3,
+  escapeinside={(*@}{@*)} % Custom escape settings to handle special chars
 }
 
 \newtheoremstyle{theorem}
@@ -105,7 +106,7 @@ In mathematics, we rely on the axiom of reflexivity to assert that $37x + q = 37
 
 Thus, both in Lean and in traditional mathematics, the proof of $37x + q = 37x + q$ is an application of the same fundamental concept: the reflexivity of equality.
 
-\subsection{Answers to 5-8}
+\subsubsection*{Answers to Levels 5-8}
 
 \subsubsection*{Level 5}
 
@@ -147,19 +148,130 @@ rw [add_zero]
 rfl
 \end{verbatim}
 
+\subsection{Week 2}
+
+\subsubsection*{Levels 1-5 Proofs in Lean}
+
+\textbf{Level 1}
+\begin{verbatim}
+induction n with d hd
+rw [add_zero]
+rfl
+rw [add_succ]
+rw [succ_eq_add_one]
+rw [succ_eq_add_one]
+rw [hd]
+rfl
+\end{verbatim}
+
+\textbf{Level 2}
+\begin{verbatim}
+induction b with a ab
+rw [add_zero]
+rw [add_zero]
+rfl
+rw [add_succ]
+rw [add_succ]
+rw [ab]
+rfl
+\end{verbatim}
+
+\textbf{Level 3}
+\begin{verbatim}
+induction b with d hd
+rw [add_zero]
+rw [zero_add]
+rfl
+rw [add_succ]
+rw [succ_add]
+rw [hd]
+rfl
+\end{verbatim}
+
+\textbf{Level 4}
+\begin{verbatim}
+induction c with d hd
+rw [add_zero]
+rw [add_zero]
+rfl
+rw [add_succ]
+rw [hd]
+rw [add_succ]
+rw [add_succ]
+rfl
+\end{verbatim}
+
+\textbf{Level 5}
+\begin{verbatim}
+rw [add_assoc]
+rw [add_comm b c]
+rw [← add_assoc]
+rfl
+\end{verbatim}
+
+\subsubsection*{Mathematical Proofs}
+
+\textbf{Theorem (Associativity of Addition):} For all natural numbers $a$, $b$, and $c$, the addition operation is associative: $(a + b) + c = a + (b + c)$.
+
+\textit{Proof:} By induction on $c$:
+
+Base case: When $c = 0$, we have:
+\[
+a + b + 0 = a + (b + 0)
+\]
+Using the property of addition with zero, $a + b = a + b$ holds by reflexivity.
+
+Inductive step: Assume the hypothesis holds for $c = d$, i.e., $a + b + d = a + (b + d)$. For $c = \text{succ}(d)$, we have:
+\[
+a + b + \text{succ}(d) = (a + b + d) + \text{succ}(0) = a + (b + d) + \text{succ}(0) = a + (b + \text{succ}(d))
+\]
+Thus, associativity is proven.
+
+\textbf{Theorem (Right Commutativity of Addition):} For all natural numbers $a$, $b$, and $c$, we have $(a + b) + c = (a + c) + b$.
+
+\textit{Proof:} Rewrite $(a + b) + c$ using associativity and commutativity:
+
+\[
+(a + b) + c = a + (b + c) = a + (c + b) = (a + c) + b
+\]
+
+\subsubsection*{Proofs in Lean}
+
+\textbf{Proof of \texttt{add\_assoc} in Lean}
+\begin{verbatim}
+induction c with d hd
+-- Base case
+rw [add_zero]
+rw [add_zero]
+rfl
+-- Inductive step
+rw [add_succ]
+rw [hd]
+rw [add_succ]
+rw [add_succ]
+rfl
+\end{verbatim}
+
+\textbf{Proof of \texttt{add\_right\_comm} in Lean}
+\begin{verbatim}
+rw [add_assoc]
+rw [add_comm b c]
+rw [← add_assoc]
+rfl
+\end{verbatim}
+
 \section{Lessons from the Assignments}
 
 \subsection{Key Lessons}
 
-This assignment reinforced the importance of foundational properties in mathematics, like reflexivity, commutativity, and associativity, and their version in Lean. Lean's tactics such as `rfl` and `rw` simplify proofs by automating logical steps, allowing for verification of mathematical statements.
-
+The assignments taught the foundational properties in mathematics, such as reflexivity, commutativity, and associativity, and their implementation in Lean. Lean's tactics like `rfl` and `rw` simplify proofs by automating logical steps, making it easier to verify mathematical statements. 
 
 \section{Conclusion}\label{conclusion}
 
-The first assignment provided insight into the mathematics and computational logic, and teaching me how to verify simple proofs in Lean.
+I have learned the connection between mathematical proofs and Lean verification. 
 
 \begin{thebibliography}{99}
-\bibitem[BLA] Author, Title, Publisher, Year
+\bibitem [BLA], Author, Title, Publisher, Year.
 \end{thebibliography}
 
 \end{document}
