@@ -150,115 +150,76 @@ rfl
 
 \subsection{Week 2}
 
-\subsubsection*{Levels 1-5 Proofs in Lean}
-
-\textbf{Level 1}
-\begin{verbatim}
-induction n with d hd
-rw [add_zero]
-rfl
-rw [add_succ]
-rw [succ_eq_add_one]
-rw [succ_eq_add_one]
-rw [hd]
-rfl
-\end{verbatim}
-
-\textbf{Level 2}
-\begin{verbatim}
-induction b with a ab
-rw [add_zero]
-rw [add_zero]
-rfl
-rw [add_succ]
-rw [add_succ]
-rw [ab]
-rfl
-\end{verbatim}
-
-\textbf{Level 3}
-\begin{verbatim}
-induction b with d hd
-rw [add_zero]
-rw [zero_add]
-rfl
-rw [add_succ]
-rw [succ_add]
-rw [hd]
-rfl
-\end{verbatim}
-
-\textbf{Level 4}
-\begin{verbatim}
-induction c with d hd
-rw [add_zero]
-rw [add_zero]
-rfl
-rw [add_succ]
-rw [hd]
-rw [add_succ]
-rw [add_succ]
-rfl
-\end{verbatim}
-
-\textbf{Level 5}
-\begin{verbatim}
-rw [add_assoc]
-rw [add_comm b c]
-rw [← add_assoc]
-rfl
-\end{verbatim}
-
-\subsubsection*{Mathematical Proofs}
+\subsubsection*{Mathematical Proofs and Lean Implementation}
 
 \textbf{Theorem (Associativity of Addition):} For all natural numbers $a$, $b$, and $c$, the addition operation is associative: $(a + b) + c = a + (b + c)$.
 
 \textit{Proof:} By induction on $c$:
 
-Base case: When $c = 0$, we have:
-\[
-a + b + 0 = a + (b + 0)
-\]
-Using the property of addition with zero, $a + b = a + b$ holds by reflexivity.
+\begin{itemize}
+    \item \textbf{Base Case:} When $c = 0$, we have:
+    \[
+    (a + b) + 0 = a + (b + 0)
+    \]
+    Using the property addition with zero, this simplifies to:
+    \[
+    a + b = a + b
+    \]
+    This equality holds by the reflexivity of equality
 
-Inductive step: Assume the hypothesis holds for $c = d$, i.e., $a + b + d = a + (b + d)$. For $c = \text{succ}(d)$, we have:
-\[
-a + b + \text{succ}(d) = (a + b + d) + \text{succ}(0) = a + (b + d) + \text{succ}(0) = a + (b + \text{succ}(d))
-\]
-Thus, associativity is proven.
+    \item \textbf{Inductive Step:} Assume the hypothesis holds for some $d$
+    \[
+    (a + b) + d = a + (b + d)
+    \]
+    We must prove $c = \text{succ}(d)$:
+    \[
+    (a + b) + \text{succ}(d) = a + (b + \text{succ}(d))
+    \]
+    this can be rewritten as:
+    \[
+    \text{succ}((a + b) + d) = \text{succ}(a + (b + d))
+    \]
+    By the inductive hypothesis, we know $(a + b) + d = a + (b + d)$, so:
+    \[
+    \text{succ}((a + b) + d) = \text{succ}(a + (b + d))
+    \]
+    This completes the proof of associativity.
+\end{itemize}
 
-\textbf{Theorem (Right Commutativity of Addition):} For all natural numbers $a$, $b$, and $c$, we have $(a + b) + c = (a + c) + b$.
+\textbf{Connection to Lean Proof of Associativity of Addition:}
 
-\textit{Proof:} Rewrite $(a + b) + c$ using associativity and commutativity:
+The Lean proof is the same structure of the mathematical proof:
 
-\[
-(a + b) + c = a + (b + c) = a + (c + b) = (a + c) + b
-\]
-
-\subsubsection*{Proofs in Lean}
-
-\textbf{Proof of \texttt{add\_assoc} in Lean}
 \begin{verbatim}
 induction c with d hd
 -- Base case
-rw [add_zero]
-rw [add_zero]
-rfl
+rw [add_zero]  -- Simplifies (a + b) + 0 to a + b using add_zero
+rw [add_zero]  -- Simplifies a + (b + 0) to a + b using add_zero
+rfl            -- Reflexivity: confirms a + b = a + b
 -- Inductive step
-rw [add_succ]
-rw [hd]
-rw [add_succ]
-rw [add_succ]
-rfl
+rw [add_succ]  -- Rewrites (a + b) + succ d as succ ((a + b) + d)
+rw [hd]        -- Applies the inductive hypothesis: (a + b) + d = a + (b + d)
+rw [add_succ]  -- Rewrites a + (b + succ d) as succ (a + (b + d))
+rw [add_succ]  -- Confirms that the expressions on both sides match
+rfl            -- Reflexivity: confirms succ (a + (b + d)) = succ (a + (b + d))
 \end{verbatim}
 
-\textbf{Proof of \texttt{add\_right\_comm} in Lean}
-\begin{verbatim}
-rw [add_assoc]
-rw [add_comm b c]
-rw [← add_assoc]
-rfl
-\end{verbatim}
+\textbf{Explanation:}
+
+\begin{itemize}
+  \item \textbf{Base Case in Lean:}
+  \begin{itemize}
+      \item \texttt{rw [add\_zero]} is used twice to simplify both sides of the equation to $a + b$, directly corresponding to the mathematical step where $a + b = a + b$ is shown by reflexivity.
+      \item \texttt{rfl} is then used to verify
+  \end{itemize}
+
+  \item \textbf{Inductive Step in Lean:}
+  \begin{itemize}
+      \item \texttt{rw [add\_succ]} rewrites the expression using the definition of addition with the successor, corresponding to the mathematical step where we transition from $(a + b) + \text{succ}(d)$ to $\text{succ}((a + b) + d)$.
+      \item \texttt{rw [hd]} applies the inductive hypothesis, mirroring the assumption that $(a + b) + d = a + (b + d)$.
+  \end{itemize}
+\end{itemize}
+
 
 \section{Lessons from the Assignments}
 
@@ -271,7 +232,6 @@ The assignments taught the foundational properties in mathematics, such as refle
 I have learned the connection between mathematical proofs and Lean verification. 
 
 \begin{thebibliography}{99}
-\bibitem [BLA], Author, Title, Publisher, Year.
+\bibitem[BLA], Author, Title, Publisher, Year.
 \end{thebibliography}
-
 \end{document}
