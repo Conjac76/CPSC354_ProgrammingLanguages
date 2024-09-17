@@ -1,5 +1,6 @@
 \documentclass{article}
-
+\usepackage{amsmath}
+\usepackage{forest}
 \usepackage{tikz} 
 \usetikzlibrary{automata, positioning, arrows} 
 
@@ -236,6 +237,133 @@ rfl            -- Reflexivity: confirms succ (a + (b + d)) = succ (a + (b + d))
 \textbf{Links to two reviews I voted for:} \\
 \href{https://github.com/tannerplatt/TannerHW3_354/blob/main/README.md}{https://github.com/tannerplatt/TannerHW3\_354/blob/main/README.md} \\
 \href{https://github.com/tyedwards37/Using-LLM-for-Literature-Review}{https://github.com/tyedwards37/Using-LLM-for-Literature-Review}
+
+
+\subsection{Week 4}
+
+\subsection*{Derivation Trees}
+
+Below are the derivation trees for the given strings using the provided context-free grammar:
+
+\subsubsection*{1. Derivation Tree for \(2+1\)}
+
+\begin{forest}
+  [Exp
+    [Exp ['2']]
+    [\texttt{'+'}]
+    [Exp1
+      [Exp2 ['1']]
+    ]
+  ]
+\end{forest}
+
+\subsubsection*{2. Derivation Tree for \(1+2*3\)}
+
+\begin{forest}
+  [Exp
+    [Exp ['1']]
+    [\texttt{'+'}]
+    [Exp1
+      [Exp1 
+        [Exp2 ['2']]
+      ]
+      [\texttt{'*'}]
+      [Exp2 ['3']]
+    ]
+  ]
+\end{forest}
+
+\subsubsection*{3. Derivation Tree for \(1+(2*3)\)}
+
+\begin{forest}
+  [Exp
+    [Exp ['1']]
+    [\texttt{'+'}]
+    [Exp1
+      [Exp2
+        [\texttt{'('}]
+        [Exp
+          [Exp1
+            [Exp1
+              [Exp2 ['2']]
+            ]
+            [\texttt{'*'}]
+            [Exp2 ['3']]
+          ]
+        ]
+        [\texttt{')'}]
+      ]
+    ]
+  ]
+\end{forest}
+
+\subsubsection*{4. Derivation Tree for \((1+2)*3\)}
+
+\begin{forest}
+  [Exp
+    [Exp1
+      [Exp1 
+        [Exp2
+          [\texttt{'('}]
+          [Exp
+            [Exp1
+              [Exp
+                [Exp1
+                  [Exp2 ['1']]
+                ]
+              ]
+              [\texttt{'+'}]
+              [Exp1
+                [Exp2 ['2']]
+              ]
+            ]
+          ]
+          [\texttt{')'}]
+        ]
+      ]
+      [\texttt{'*'}]
+      [Exp2 ['3']]
+    ]
+  ]
+\end{forest}
+
+\subsubsection*{5. Derivation Tree for \(1+2*3+4*5+6\)}
+
+\begin{forest}
+  [Exp
+    [Exp
+      [Exp 
+        [Exp1
+          [Exp2 ['1']]
+        ]
+      ]
+      [\texttt{'+'}]
+      [Exp1
+        [Exp1
+          [Exp1 
+            [Exp2 ['2']]
+          ]
+          [\texttt{'*'}]
+          [Exp2 ['3']]
+        ]
+      ]
+    ]
+    [\texttt{'+'}]
+    [Exp1
+      [Exp1
+        [Exp1 
+          [Exp2 ['4']]
+        ]
+        [\texttt{'*'}]
+        [Exp2 ['5']]
+      ]
+      [\texttt{'+'}]
+      [Exp1
+        [Exp2 ['6']]
+      ]
+    ]
+  ]
+\end{forest}
 
 
 \section{Lessons from the Assignments}
