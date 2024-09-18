@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1726606196.95799 "/Users/connorjacobs/Documents/CPSC_354/CPSC354/CPSC354/Report/report.tex" "report.pdf" "report" 1726606198.95727 0
-  "/Users/connorjacobs/Documents/CPSC_354/CPSC354/CPSC354/Report/report.tex" 1726606195.27891 10803 5bb78e996f9a16c94877c47f680aa721 ""
+["pdflatex"] 1726606863.27777 "/Users/connorjacobs/Documents/CPSC_354/CPSC354/CPSC354/Report/report.tex" "report.pdf" "report" 1726606865.30805 0
+  "/Users/connorjacobs/Documents/CPSC_354/CPSC354/CPSC354/Report/report.tex" 1726606863.12505 10803 5bb78e996f9a16c94877c47f680aa721 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -198,10 +198,10 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1724963155.31328 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1724963143 8221423 120411b2b4b66a0f9254e8b74f8453f6 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "report.aux" 1726606198.8776 1361 9642bff489972642a537eadcc2c7e5e8 "pdflatex"
-  "report.out" 1726606198.87851 972 0aa51a7183a5c2b44de8e8dd64a1b0c6 "pdflatex"
-  "report.tex" 1726606195.27891 10803 5bb78e996f9a16c94877c47f680aa721 ""
-  "report.toc" 1726606198.8788 651 add7667c59eace9e628511914b38853e "pdflatex"
+  "report.aux" 1726606865.22896 1361 9642bff489972642a537eadcc2c7e5e8 "pdflatex"
+  "report.out" 1726606865.22968 972 0aa51a7183a5c2b44de8e8dd64a1b0c6 "pdflatex"
+  "report.tex" 1726606863.12505 10803 5bb78e996f9a16c94877c47f680aa721 ""
+  "report.toc" 1726606865.22989 651 add7667c59eace9e628511914b38853e "pdflatex"
   (generated)
   "report.aux"
   "report.log"
