@@ -1,0 +1,23 @@
+?start: expr
+
+?expr: expr "+" term   -> plus
+     | expr "-" term   -> minus
+     | term
+
+?term: term "*" factor -> times
+     | term "/" factor -> divide
+     | factor
+
+?factor: "log" factor "base" factor -> log
+       | "-" factor                 -> neg
+       | power
+
+?power: atom "^" power  -> power
+       | atom
+
+?atom: NUMBER           -> num
+     | "(" expr ")"
+
+%import common.NUMBER
+%import common.WS
+%ignore WS
