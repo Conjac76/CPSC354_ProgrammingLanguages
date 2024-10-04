@@ -429,6 +429,62 @@ If $P \land (Q \land R) \land ((S \land T) \land (U \land V))$, then $P \land (S
 \end{align*}
 
 
+\subsection{Week 6}
+
+
+\subsubsection*{Level 1}
+\begin{verbatim}
+have c : C := bakery_service p
+exact c
+\end{verbatim}
+
+\subsubsection*{Level 2}
+\begin{verbatim}
+exact /lambda h : C -> h
+\end{verbatim}
+
+\subsubsection*{Level 3}
+\begin{verbatim}
+exact /lamba h : I ^ S -> ⟨h.right, h.left⟩
+\end{verbatim}
+
+\subsubsection*{Level 4}
+\begin{verbatim}
+exact /lamba c : C -> h2 (h1 c)
+\end{verbatim}
+
+\subsubsection*{Level 5}
+\begin{verbatim}
+have q : Q := h1 p
+have t : T := h3 q
+have u : U := h5 t
+exact u
+\end{verbatim}
+
+\subsubsection*{Level 6}
+\begin{verbatim}
+exact fun c : C => fun d : D => h ⟨c, d⟩
+\end{verbatim}
+
+\subsubsection*{Level 7}
+\begin{verbatim}
+exact fun cd : C ^ D => h cd.left cd.right
+\end{verbatim}
+
+\subsubsection*{Level 8}
+\begin{verbatim}
+exact fun s : S => ⟨h.left s, h.right s⟩
+\end{verbatim}
+
+\subsubsection*{Level 9}
+\begin{verbatim}
+exact fun r : R => ⟨fun s : S => r, fun ns : ¬S => r⟩
+\end{verbatim}
+
+\subsubsection*{Question:}
+Lambda calculus serves as a foundational framework for computation and formal logic. How can lambda calculus be used to reason about mnore advanced concepts, such as polymorphism?
+
+
 \section{Lessons from the Assignments}
 
 \subsection{Key Lessons}
