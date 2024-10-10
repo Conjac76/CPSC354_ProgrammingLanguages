@@ -484,6 +484,64 @@ exact fun r : R => ⟨fun s : S => r, fun ns : ¬S => r⟩
 \subsubsection*{Question:}
 Lambda calculus serves as a foundational framework for computation and formal logic. How can lambda calculus be used to reason about mnore advanced concepts, such as polymorphism?
 
+\subsection{Week 7}
+
+\subsubsection*{Question 1:}
+
+Reduce the following lambda term:
+\[ ((\lambda m.\lambda n.m\,n)\,(\lambda f.\lambda x.f\,(f\,x)))\,(\lambda f.\lambda x.f\,(f\,(f\,x))) \]
+
+\textbf{Step 1:}
+\begin{align*}
+(\lambda m.\lambda n.m\,n)\,(\lambda f.\lambda x.f\,(f\,x)) &\rightarrow \lambda n.(\lambda f.\lambda x.f\,(f\,x))\,n
+\end{align*}
+
+\textbf{Step 2:}
+\begin{align*}
+\lambda n.(\lambda f.\lambda x.f\,(f\,x))\,n\,(\lambda f.\lambda x.f\,(f\,(f\,x))) &\rightarrow (\lambda f.\lambda x.f\,(f\,x))\,(\lambda f.\lambda x.f\,(f\,(f\,x)))
+\end{align*}
+
+\textbf{Step 3:} 
+\[ \lambda x.((\lambda f.\lambda x.f\,(f\,(f\,x))))\,((\lambda f.\lambda x.f\,(f\,(f\,x)))\,x) \]
+
+\begin{align*}
+(\lambda f.\lambda x.f\,(f\,x))\,(\lambda f.\lambda x.f\,(f\,(f\,x))) &\rightarrow \lambda x.[(\lambda f.\lambda x.f\,(f\,(f\,x)))]\,((\lambda f.\lambda x.f\,(f\,(f\,x)))\,x)
+\end{align*}
+
+\textbf{Step 4:}
+\begin{align*}
+(\lambda f.\lambda x.f\,(f\,(f\,x)))\,x &\rightarrow \lambda x.x\,(x\,(x\,x))
+\end{align*}
+
+\begin{align*}
+(\lambda f.\lambda x.f\,(f\,(f\,x)))\,x &\rightarrow x\,(x\,(x\,x))
+\end{align*}
+
+\textbf{Step 5:}
+\[ \lambda x.((\lambda f.\lambda x.f\,(f\,(f\,x))))\,(x\,(x\,(x\,x))) \]
+
+\textbf{Step 6:} 
+\[ \lambda x.(x\,(x\,(x\,x)))\,(x\,(x\,(x\,x))\,x) \]
+
+\textbf{Step 7:} 
+\[ \lambda x.(x\,(x\,(x\,x)))\,(x\,(x\,(x\,x\,x))) \]
+
+the function is applying $x$ six times, which corresponds to the Church numeral 6.
+
+
+\subsubsection*{Question 2:}
+
+Explain what function on natural numbers $\lambda m.\lambda n.m\,n$ implements.
+
+\subsection*{Answer:}
+The lambda term $\lambda m.\lambda n.m\,n$ represents the multiplication operation in Church numerals.
+
+\textbf{Explanation:}
+In Church encoding, natural numbers are represented as repeated applications of a function. The numeral $n$ is encoded as $\lambda f.\lambda x.f^n\,x$. The term $m\,n$ applies the function $m$ to $n$. Since $m$ represents applying a function $f$ $m$ times, and $n$ represents applying $f$ $n$ times, their composition results in $m \times n$ applications of $f$. Therefore, $\lambda m.\lambda n.m\,n$ takes two Church numerals and returns their product.
+
+\subsubsection*{Question for Discord:}
+Is it possible to represent data structures like pairs or lists using Church numerals and lambda calculus? If so, how do these representations work?
+
 
 \section{Lessons from the Assignments}
 
