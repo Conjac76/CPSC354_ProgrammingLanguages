@@ -2,7 +2,9 @@
 \usepackage{amsmath}
 \usepackage{forest}
 \usepackage{tikz} 
-\usetikzlibrary{automata, positioning, arrows} 
+\usepackage{tikz-cd} % For diagrams
+ \usepackage{quiver}
+\usetikzlibrary{automata, positioning, arrows, cd} 
 
 \usepackage{amsthm}
 \usepackage{amsfonts}
@@ -542,6 +544,242 @@ In Church encoding, natural numbers are represented as repeated applications of 
 \subsubsection*{Question for Discord:}
 Is it possible to represent data structures like pairs or lists using Church numerals and lambda calculus? If so, how do these representations work?
 
+\subsection{Week 8/9}
+
+
+\textbf{Question 2.}
+
+The expression \texttt{a b c d} reduces to \texttt{(((a b) c) d)} becuase of the way lambda calculus handles application. Application is left associative. The function \texttt{a} is applied to \texttt{b}, then the result is applied to \texttt{c}, and finally, the result is applied to \texttt{d}. This can be written as:
+
+\[
+ (((a \, b) \, c) \, d)
+\]
+
+\textbf{Question 3.}
+
+In lambda calculus, capture-avoiding substitution prevents bound variable names from unintentionally clashing with free variables. This is implemented in the \texttt{substitute} function, where:
+
+- **Variables**: If a variable matches the name being substituted, it is replaced with the new expression; otherwise, it remains unchanged.
+
+- **Lambda Abstractions**: If the bound variable matches the name being substituted, substitution is skipped for that scope. If not, a fresh name is generated using the \texttt{NameGenerator} to avoid conflicts, and substitution proceeds recursively.
+
+- **Applications**: Substitution occurs recursively in both the function and argument.
+
+\textbf{Example 1 (No Name Conflict)}:
+\begin{verbatim}
+(\x. \y. x) z
+\end{verbatim}
+Reduces to: 
+\[
+\lambda y. z
+\]
+
+\textbf{Example 2 (Name Conflict)}:
+\begin{verbatim}
+(\x. \y. x) y
+\end{verbatim}
+Reduces to: 
+\[
+\lambda \text{Var1}. y
+\]
+where \texttt{Var1} is a fresh variable generated to avoid conflict with \texttt{y}.
+
+
+\textbf{Question 4.}
+No, not all computations in lambda calculus reduce to normal form, and there are situations where evaluation may not terminate or result in a normal form.
+
+Infinite Loops (Divergence): An expression like the following doesn't have a normal form:
+
+\begin{verbatim}
+(\x. x x) (\x. x x)
+\end{verbatim}
+
+\textbf{Question 5.}
+Smallest lambda expression that does not reduce to normal form is known as the Omega combinator
+
+\begin{verbatim}
+  (\x. x x) (\x. x x)
+\end{verbatim}
+
+\textbf{Question 7.}
+
+\begin{verbatim}
+((\m.\n. m n) (\f.\x. f (f x))) (\f.\x. f (f (f x)))
+((\Var1. (\f.\x. f (f x)) Var1) ) (\f.\x. f (f (f x)))
+(\Var2. (\f.\x. f (f (f x))) ((\f.\x. f (f (f x))) Var2))
+\end{verbatim}
+
+\textbf{Question 8.}
+
+\begin{verbatim}
+  12: eval (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f x))))
+  39: eval ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+      39: eval (\m.(\n.(m n)))
+      44: substitute ((\n.(m n)), 'm', (\f.(\x.(f (f x)))))
+      45: eval (\Var1.((\f.(\x.(f (f x)))) Var1))
+  44: substitute (((\f.(\x.(f (f x)))) Var1), 'Var1', (\f.(\x.(f (f (f x))))))
+  45: eval ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
+      39: eval (\Var2.(\Var4.(Var2 (Var2 Var4))))
+      44: substitute ((\Var4.(Var2 (Var2 Var4))), 'Var2', (\f.(\x.(f (f (f x))))))
+      45: eval (\Var5.((\f.(\x.(f (f (f x))))) ((\f.(\x.(f (f (f x))))) Var5)))
+\end{verbatim}
+
+
+\subsection{Week 10}
+
+
+\begin{enumerate}
+    \item \textbf{Most challenging aspect:} The biggest challenge was managing substitution in a way that avoided unintended variable capture, especially within deeply nested expressions. In the old `evaluate` function, substitution was only partially recursive, which sometimes led to incorrect evaluations when multiple applications or nested abstractions were involved. Ensuring that each function application and lambda abstraction was fully reduced required a more comprehensive approach, where both sides of applications were evaluated recursively and abstractions were reduced in sequence. This transformation was complex but essential for producing a reliable evaluation function.
+
+    \item \textbf{Key insight for Assignment 3:} The key insight emerged from recognizing that the old `evaluate` function only partially evaluated applications by handling a single argument at a time. In the new version, `evaluate` was enhanced to handle both sides of a function application (`app`) recursively, which allowed for a more complete evaluation. Furthermore, an additional case was added to evaluate lambda abstractions (`lam`) by reducing their bodies, creating a more robust and normalized output. This recursive depth and abstraction evaluation were critical in managing nested applications and ensuring proper reduction to normal form.
+
+    \item \textbf{Most interesting takeaway:} One of the most interesting takeaways from this assignment was understanding the full recursive structure required for accurate lambda calculus evaluation.
+\end{enumerate}
+
+\noindent \textbf{Question on Discord:} "In lambda calculus, how does normalization ensure that each function application reaches a unique reduced form, and are there cases where this process doesn’t terminate?"
+
+
+\subsection{Week 11}
+
+\subsubsection*{Question 1: A = \{\}}
+
+Since the set A is empty, there is nothing to draw for this ARS.
+
+Terminating: Yes 
+
+Confluent: Yes
+
+Unique Normal Forms: Yes
+
+\subsubsection*{Question 2: A = \{a\} and R = \{\}}
+
+\[
+\begin{tikzcd}
+a
+\end{tikzcd}
+\]
+
+Terminating: Yes
+
+Confluent: Yes 
+
+Unique Normal Forms: Yes
+
+\subsubsection*{Question 3: A = \{a\} and R = \{a, a\}}
+
+\[
+\begin{tikzcd}
+a \arrow[loop right]{}
+\end{tikzcd}
+\]
+
+Terminating: No
+
+Confluent: Yes 
+
+Unique Normal Forms: No
+
+\subsubsection*{Question 4: A = \{a, b, c\} and R = \{(a, b), (a, c)\}}
+
+\[
+\begin{tikzcd}
+& a \arrow[ld] \arrow[rd] & \\
+b & & c
+\end{tikzcd}
+\]
+
+Terminating: Yes
+
+Confluent: No
+
+Unique Normal Forms: No
+
+\subsubsection*{Question 5: A = \{a, b\} and R = \{(a, a), (a, b)\}}
+
+\[
+\begin{tikzcd}
+a \arrow[loop above]{} \arrow[r] & b
+\end{tikzcd}
+\]
+
+Terminating: No
+
+Confluent: Yes
+
+Unique Normal Forms: Yes
+
+\subsubsection*{Question 6: A = \{a, b, c\} and R = \{(a, b), (b, b), (a, c)\}}
+
+\[
+\begin{tikzcd}
+& a \arrow[ld] \arrow[rd] & \\
+b \arrow[loop left]{} & & c
+\end{tikzcd}
+\]
+
+Terminating: No
+
+Confluent: No
+
+Unique Normal Forms: No
+
+\subsubsection*{Question 7: A = \{a, b, c\} and R = \{(a, b), (b, b), (a, c), (c, c)\}}
+
+\[
+\begin{tikzcd}
+& a \arrow[ld] \arrow[rd] & \\
+b \arrow[loop left]{} & & c \arrow[loop right]{}
+\end{tikzcd}
+\]
+
+Terminating: No
+
+Confluent: No
+
+Unique Normal Forms: No
+
+\subsubsection*{Homework: Try to find an example of an ARS for each of the possible 8 combinations. Draw pictures of these examples.}
+
+\begin{center}
+  \begin{tabular}{|c|c|c|c|c|}
+  \hline
+  \textbf{Confluent} & \textbf{Terminating} & \textbf{Has UNF} & \textbf{Example} \\
+  \hline
+  True & True & True & 
+  \begin{tikzcd}
+  a \arrow[r] & b
+  \end{tikzcd} \\
+  \hline
+  True & True & False & N/A (Impossible) \\
+  \hline
+  True & False & True & 
+  \begin{tikzcd}
+  a \arrow[r] & b \arrow[loop right]{}
+  \end{tikzcd} \\
+  \hline
+  True & False & False & 
+  \begin{tikzcd}
+  a \arrow[loop right]{}
+  \end{tikzcd} \\
+  \hline
+  False & True & True & N/A \\
+  \hline
+  False & True & False & 
+  \begin{tikzcd}
+  & a \arrow[ld] \arrow[rd] & \\
+  b & & c
+  \end{tikzcd} \\
+  \hline
+  False & False & True & N/A \\
+  \hline
+  False & False & False & 
+  \begin{tikzcd}
+  a \arrow[r] & b \arrow[r] & c \arrow[ll, bend left]
+  \end{tikzcd} \\
+  \hline
+  \end{tabular}
+  \end{center}
+  
 
 \section{Lessons from the Assignments}
 
