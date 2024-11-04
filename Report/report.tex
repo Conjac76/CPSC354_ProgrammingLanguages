@@ -613,17 +613,19 @@ Smallest lambda expression that does not reduce to normal form is known as the O
 
 \begin{verbatim}
   12: eval (((\m.(\n.(m n))) (\f.(\x.(f (f x))))) (\f.(\x.(f x))))
-  39: eval ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
+    39: eval ((\m.(\n.(m n))) (\f.(\x.(f (f x)))))
       39: eval (\m.(\n.(m n)))
       44: substitute ((\n.(m n)), 'm', (\f.(\x.(f (f x)))))
       45: eval (\Var1.((\f.(\x.(f (f x)))) Var1))
-  44: substitute (((\f.(\x.(f (f x)))) Var1), 'Var1', (\f.(\x.(f (f (f x))))))
-  45: eval ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
+    44: substitute (((\f.(\x.(f (f x)))) Var1), 'Var1', (\f.(\x.(f (f (f x))))))
+    45: eval ((\Var2.(\Var4.(Var2 (Var2 Var4)))) (\f.(\x.(f (f (f x))))))
       39: eval (\Var2.(\Var4.(Var2 (Var2 Var4))))
       44: substitute ((\Var4.(Var2 (Var2 Var4))), 'Var2', (\f.(\x.(f (f (f x))))))
       45: eval (\Var5.((\f.(\x.(f (f (f x))))) ((\f.(\x.(f (f (f x))))) Var5)))
 \end{verbatim}
 
+
+\textbf{Question on Discord:} -how does left-associative application impact the sequence and structure of reduction steps when evaluating complex expressions
 
 \subsection{Week 10}
 
@@ -636,7 +638,7 @@ Smallest lambda expression that does not reduce to normal form is known as the O
     \item \textbf{Most interesting takeaway:} One of the most interesting takeaways from this assignment was understanding the full recursive structure required for accurate lambda calculus evaluation.
 \end{enumerate}
 
-\noindent \textbf{Question on Discord:} "In lambda calculus, how does normalization ensure that each function application reaches a unique reduced form, and are there cases where this process doesn’t terminate?"
+\noindent \textbf{Question on Discord:} In what ways do modern interpreters and compilers handle complex recursive evaluations to ensure expressions reduce accurately
 
 
 \subsection{Week 11}

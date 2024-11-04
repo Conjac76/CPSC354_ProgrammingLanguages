@@ -1,15 +1,16 @@
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
 \contentsline {section}{\numberline {2}Week by Week}{1}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Week 1}{1}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Week 2}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Week 3}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.2}Week 2}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Week 3}{3}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Week 4}{4}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Week 5}{6}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Week 6}{8}{subsection.2.6}%
-\contentsline {subsection}{\numberline {2.7}Week 7}{9}{subsection.2.7}%
-\contentsline {subsection}{\numberline {2.8}Week 8/9}{10}{subsection.2.8}%
-\contentsline {subsection}{\numberline {2.9}Week 10}{11}{subsection.2.9}%
+\contentsline {subsection}{\numberline {2.6}Week 6}{7}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Week 7}{8}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Week 8/9}{9}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Week 10}{10}{subsection.2.9}%
 \contentsline {subsection}{\numberline {2.10}Week 11}{11}{subsection.2.10}%
 \contentsline {section}{\numberline {3}Lessons from the Assignments}{13}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Key Lessons}{13}{subsection.3.1}%
 \contentsline {section}{\numberline {4}Conclusion}{13}{section.4}%
+
