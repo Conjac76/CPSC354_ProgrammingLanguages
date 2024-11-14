@@ -784,6 +784,109 @@ Unique Normal Forms: No
 
 \textbf{Question on Discord:} Why is it impossible to have an ARS that is both Confluent and Terminating but does not have Unique Normal Forms?
 
+
+\subsection{Week 12} 
+
+\text{Starting Point:}
+\[
+\text{let rec } \text{fact} = \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1) \text{ in } \text{fact } 3
+\]
+
+\text{Step 1: Expanding } \text{let rec}
+\[
+\text{let } \text{fact} = (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \text{ in } \text{fact } 3
+\]
+
+\text{Step 2: Expanding } \text{let}
+\[
+(\lambda \text{fact}. \text{fact } 3) (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1)))
+\]
+
+\text{Step 3: Applying } \text{fix}
+\[
+(\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \ 3
+\]
+\[
+= (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1)) (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \ 3
+\]
+
+\text{Step 4: Applying the function}
+\[
+(\lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) (n - 1)) \ 3
+\]
+
+\text{Step 5: Computing } \text{if } n = 0
+\[
+\text{if } 3 = 0 \text{ then } 1 \text{ else } 3 \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) (3 - 1)
+\]
+\[
+= 3 \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \ 2
+\]
+
+\text{Step 6: Applying } \text{fix} \text{ again}
+\[
+3 \times (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1)) (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \ 2
+\]
+
+\text{Step 7: Applying the function}
+\[
+3 \times (\lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) (n - 1)) \ 2
+\]
+
+\text{Step 8: Computing } \text{if } n = 0 \text{ for } n = 2
+\[
+3 \times (\text{if } 2 = 0 \text{ then } 1 \text{ else } 2 \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) (2 - 1))
+\]
+\[
+= 3 \times (2 \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \ 1)
+\]
+
+\text{Step 9: Applying } \text{fix} \text{ one more time}
+\[
+3 \times 2 \times (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1)) (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \ 1
+\]
+
+\text{Step 10: Applying the function}
+\[
+3 \times 2 \times (\lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) (n - 1)) \ 1
+\]
+
+\text{Step 11: Computing } \text{if } n = 0 \text{ for } n = 1
+\[
+3 \times 2 \times (\text{if } 1 = 0 \text{ then } 1 \text{ else } 1 \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) (1 - 1))
+\]
+\[
+= 3 \times 2 \times (1 \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \ 0)
+\]
+
+\text{Step 12: Applying } \text{fix} \text{ again}
+\[
+3 \times 2 \times 1 \times (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1)) (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) \ 0
+\]
+
+\text{Step 13: Applying the function}
+\[
+3 \times 2 \times 1 \times (\lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) (n - 1)) \ 0
+\]
+
+\text{Step 14: Computing } \text{if } n = 0 \text{ for } n = 0
+\[
+3 \times 2 \times 1 \times (\text{if } 0 = 0 \text{ then } 1 \text{ else } 0 \times (\text{fix} \ (\lambda \text{fact}. \lambda n. \text{if } n = 0 \text{ then } 1 \text{ else } n \times \text{fact}(n - 1))) (0 - 1))
+\]
+\[
+= 3 \times 2 \times 1 \times 1 \quad (\text{since } 0 = 0, \text{ take the } \text{then} \text{ branch})
+\]
+
+\text{Final Computation:}
+\[
+3 \times 2 \times 1 \times 1 = 6
+\]
+
+\text{The result is } 6.
+
+\subsection*{Question for discord:}
+are there specific cases where using recursion in lambda calculus can lead to inefficiencies that an iterative approach could solve more cleanly?
+
   
 
 \section{Lessons from the Assignments}

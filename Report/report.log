@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.29)  7 NOV 2024 16:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.29)  14 NOV 2024 14:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -920,19 +920,19 @@ File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 646.
  [11] [12]
-[13] [14] (./report.aux)
+[13] [14] [15] (./report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 8303854E325F45AA7AE7892E74946F54;1539.
+(rerunfilecheck)             Checksum: F56642DDF3D0D7E9B61A35E5A69D2024;1636.
  ) 
 Here is how much of TeX's memory you used:
- 38261 strings out of 474116
- 834128 string characters out of 5743682
+ 38265 strings out of 474116
+ 834178 string characters out of 5743682
  1953187 words of memory out of 5000000
- 60047 multiletter control sequences out of 15000+600000
+ 60048 multiletter control sequences out of 15000+600000
  567940 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  181i,21n,159p,1599b,3002s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -951,10 +951,10 @@ live/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texl
 ive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texli
 ve/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive
 /2024/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on report.pdf (14 pages, 223648 bytes).
+Output written on report.pdf (15 pages, 226683 bytes).
 PDF statistics:
- 299 PDF objects out of 1000 (max. 8388607)
- 250 compressed objects within 3 object streams
- 84 named destinations out of 1000 (max. 500000)
- 133 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 310 PDF objects out of 1000 (max. 8388607)
+ 260 compressed objects within 3 object streams
+ 87 named destinations out of 1000 (max. 500000)
+ 141 words of extra memory for PDF output out of 10000 (max. 10000000)
 
