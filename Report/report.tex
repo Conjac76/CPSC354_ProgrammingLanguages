@@ -887,6 +887,61 @@ Unique Normal Forms: No
 \subsection*{Question for discord:}
 are there specific cases where using recursion in lambda calculus can lead to inefficiencies that an iterative approach could solve more cleanly?
 
+
+
+\subsection{Week 13}
+\textbf{Excercise 8:}  
+Consider the rewrite rules:  
+\[
+ab \to cc, \quad ac \to bb, \quad bc \to aa
+\]
+plus rules saying that the order of letters does not matter. Starting from \( 15a \), \( 14b \), and \( 13c \), is it possible to reach a configuration in which there are only \( a \)'s, only \( b \)'s, or only \( c \)'s?
+
+\subsection*{Solution}
+
+1. \textbf{Invariant:}  
+   A helpful approach is to use an invariant that remains unchanged under the rewrite rules. By analyzing the given rules:  
+   \begin{itemize}
+       \item \( ab \to cc \): reduces \( a + b \), increases \( c \) by \( +2 \).
+       \item \( ac \to bb \): reduces \( a + c \), increases \( b \) by \( +2 \).
+       \item \( bc \to aa \): reduces \( b + c \), increases \( a \) by \( +2 \).
+   \end{itemize}
+   The total number of letters \( f(a, b, c) = a + b + c \) remains constant under all rules.
+
+   Initial value:
+   \[
+   f(15, 14, 13) = 15 + 14 + 13 = 42.
+   \]
+
+   Therefore, \( 42 \) letters must be preserved at all times.
+
+2. \textbf{Parity Analysis:}  
+   Under each rule:
+   \begin{itemize}
+       \item \( ab \to cc \): The count of \( a + b + c \) remains unchanged.
+       \item \( ac \to bb \): Similarly, parity does not change.
+       \item \( bc \to aa \): Again, parity does not change.
+   \end{itemize}
+
+   Since the initial counts of \( a \), \( b \), and \( c \) are \( 15, 14, 13 \) respectively (all odd or even), parity is preserved.
+
+To reach a state where only one type of letter (\( a \), \( b \), or \( c \)) remains:
+\begin{itemize}
+    \item At least one letter type must dominate entirely while the other two reduce to zero.
+    \item However, the rules \( ab \to cc \), \( ac \to bb \), and \( bc \to aa \) always generate new letters of the other two types.
+\end{itemize}
+It is impossible to reach a state containing only \( a \)'s, \( b \)'s, or \( c \)'s because the system keeps ``mixing'' types.
+
+---
+
+\subsubsection*{Conclusion}
+Starting from \( 15a \), \( 14b \), \( 13c \), it is not possible to reduce the configuration to only \( a \)'s, \( b \)'s, or \( c \)'s. The invariant \( f(a, b, c) = 42 \) and the parity analysis confirm this result.
+
+
+
+
+\subsubsection*{Question for discord:}
+How could introducing invariants based on patterns (e.g., tracking the balance of transformations across rules) lead to unexpected equivalence classes?
   
 
 \section{Lessons from the Assignments}
