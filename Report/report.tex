@@ -944,15 +944,100 @@ Starting from \( 15a \), \( 14b \), \( 13c \), it is not possible to reduce the 
 How could introducing invariants based on patterns (e.g., tracking the balance of transformations across rules) lead to unexpected equivalence classes?
   
 
-\section{Lessons from the Assignments}
+\section{Lessons from the Assignments 1.5 pages}
 
-\subsection{Key Lessons}
+The assignments helped me see how ideas from computer science theory connect to real world uses. 
+We used Lean to prove basic math rules that we often take for granted. Including: Reflexivity
+(showing that something equals itself), Commutativity (showing that the order doesn't matter, 
+like 2+3 = 3+2), andAssociativity (showing that grouping doesn't matter, like (1+2)+3 = 1+(2+3))
+Lean has special commands that help prove these rules step by step. For instance, when we need 
+to prove that addition is associative, we used a method called induction - which is like proving 
+that if something works for the first number, then showing that if it works for one number, it 
+must work for the next one too. Lean helped by automatically checking each logical step. This 
+work isn't just theoretical - it has practical value. When we build important computer systems 
+that need to be mathematically perfect (like security systems or programs that check other 
+mathematical proofs), tools like Lean help make sure everything works exactly as it should.
 
-The assignments taught the foundational properties in mathematics, such as reflexivity, commutativity, and associativity, and their implementation in Lean. Lean's tactics like `rfl` and `rw` simplify proofs by automating logical steps, making it easier to verify mathematical statements. 
+The assignments taught me about lambda calculus. I think of it as a very simple programming language 
+that's become the foundation for many modern programming languages. This work helped me understand 
+how modern programming languages handle variables and functions, especially in languages like Haskell 
+and Scala where functions can be passed around like any other data. We added math operations and if 
+statements to our simple system. This showed how it can be built upon to create a full programming 
+language. It's like seeing how you can start with just a few bricks and build something quite complex. 
+Another valuable lesson came from evaluating Church numerals. This exercise not only showcased how 
+numbers and arithmetic operations can be represented functionally but also highlighted the elegance 
+and power of recursion. Also non-terminating evaluations—became apparent. This emphasized the 
+importance of carefully managing recursion in programming and algorithm design.
+
+The assignments reinforced the importance of invariants in reasoning about system behavior. One notable 
+exercise involved examining rewrite rules for strings while preserving the total count of characters. 
+This reasoning provided an approach to solving problems and demonstrated how to detect impossibilities, 
+such as reducing a mixed system of letters to a single type. This principle is broadly applicable in 
+areas like database management, where maintaining data integrity is critical, and in distributed systems,
+where consistent state synchronization is paramount. It's like having an anchor point that helps you check 
+if things are going wrong and proves whether certain changes are even possible.
+
+I learned about using Lean to helps check if mathematical proofs are correct. 
+Instead of having humans check every step of a proof (which can be time consuming and error prone), 
+Lean does this automatically. Its like having a super-thorough proofreader who never gets tired and 
+never misses a mistake. This is especially important when we're building systems where mistakes could be 
+dangerous or very expensive, like: Software that controls airplanes or Systems that handle large financial transactions.
+The cool thing about Lean is that it makes this kind of careful checking more: Doable (because computers can check 
+things much faster than humans), Reliable (because computers don't get tired or distracted), and Scalable (because once 
+you've proven something, you can use that proof as a building block for bigger proofs) It's like turning mathematical 
+reasoning into a language that computers can understand and verify, which gives us a powerful way to tackle really 
+complex problems while being sure our solutions are correct.
+
+
+A particularly challenging but rewarding part of the assignments was managing nested expressions and achieving 
+normal form in lambda calculus. The recursive evaluation process required careful handling of abstractions, 
+applications, and substitutions to avoid unintended variable capture. Enhancing the evaluate function to 
+handle deeply nested expressions underscored the recursive nature of computation and the importance of 
+designing robust algorithms that handle edge cases effectively.
+
+We learned about a special tool in programming called the fixed point combinator that lets us write functions that 
+can call themselves without using normal loops. While this sounds complex, it's actually a clever way to make recursive 
+functions work in a very basic programming system. This might seem like a roundabout way to do something simple, but it 
+shows something really powerful: you can create complex calculations using nothing but functions that transform other 
+functions. It's like building a complex machine using only simple parts. This matters because: It helps us understand how 
+programming languages like Haskell work under the hood, it shows how abstract math ideas can solve real programming problems, and
+it demonstrates how to build complex things from very simple building blocks
+
+We learned about turning text that humans write into a structure that computers can more easily work with. This process is called parsing, 
+and it's like taking apart a sentence to understand its grammar, but for computer code. When you write `1 + 2 * 3`, a human knows that 
+multiplication should happen before addition. But a computer needs this spelled out more clearly. So we turn it into a tree-like structure 
+that shows exactly what should happen in what order. It's like adding parentheses to make everything crystal clear: `1 + (2 * 3)`.
+We used a tool called Lark in Python that helps build these parsers. Lark is like having a set of rules (called a grammar) that tells the computer: 
+how to recognize numbers, which operations should happen first and how to handle more complex expressions. It's like being a translator between 
+human language and computer language, where every little detail needs to be precisely defined. This precision is crucial because computers 
+need absolutely clear instructions to work correctly.
+
+
+We did an interesting assignment using LLMs to help us research the history and development of programming languages. 
+We Started with a question we were curious about in programming languages, used the LLM to help us explore that topic deeper
+, found connections between different areas of programming language research and discovered who the important researchers were and 
+what they contributed. I learned to carefully check and edit what the llm suggests and how llms can help you find connections and patterns. 
+This homework taught me two main things: How different areas of programming languages connect and influence each other
+and how ow to use models effectively as a research tool. It's like having a smart brainstorming partner who can help you explore ideas and 
+make connections, but occasionally likes to make stuff up. 
+
 
 \section{Conclusion}\label{conclusion}
 
-I have learned the connection between mathematical proofs and Lean verification. 
+
+This course has taught me how theoretical computer science ideas connect to real world programming.
+First, I got hands-on experience with different tools and concepts:
+Using Lean to check mathematical proofs automatically, which showed me how computers can help ensure critical systems work correctly,
+learning about lambda calculus, which is like a simple blueprint that modern programming languages are built on, 
+understanding how computers read and understand code by breaking it down into a structure they can process and more. 
+
+The part of the course focused on turning human written into something computers can understand taught me why programming languages 
+need to be designed so carefully - it's like creating a new language that needs to be clear to both humans and machines.
+
+The biggest takeaway was seeing how abstract math and logic aren't just theoretical - they help solve real problems. 
+The course gave me both knowledge and new ways to tackle complex challenges. It's like learning to build things with both the basic 
+building blocks (the theory) and modern power tools (the practical applications), and understanding why both are important.
+
 
 \begin{thebibliography}{99}
 \bibitem[BLA], Author, Title, Publisher, Year.
