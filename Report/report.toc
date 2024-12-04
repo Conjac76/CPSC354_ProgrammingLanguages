@@ -12,5 +12,5 @@
 \contentsline {subsection}{\numberline {2.10}Week 11}{12}{subsection.2.10}%
 \contentsline {subsection}{\numberline {2.11}Week 12}{13}{subsection.2.11}%
 \contentsline {subsection}{\numberline {2.12}Week 13}{15}{subsection.2.12}%
-\contentsline {section}{\numberline {3}Lessons from the Assignments 1.5 pages}{16}{section.3}%
+\contentsline {section}{\numberline {3}Lessons from the Assignments}{16}{section.3}%
 \contentsline {section}{\numberline {4}Conclusion}{17}{section.4}%
