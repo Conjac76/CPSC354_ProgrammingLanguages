@@ -490,57 +490,56 @@ Lambda calculus serves as a foundational framework for computation and formal lo
 
 \subsubsection*{Question 1:}
 
-Reduce the following lambda term:
-\[ ((\lambda m.\lambda n.m\,n)\,(\lambda f.\lambda x.f\,(f\,x)))\,(\lambda f.\lambda x.f\,(f\,(f\,x))) \]
+Reduce the following lambda term and explain its semantic meaning:
 
-\textbf{Step 1:}
-\begin{align*}
-(\lambda m.\lambda n.m\,n)\,(\lambda f.\lambda x.f\,(f\,x)) &\rightarrow \lambda n.(\lambda f.\lambda x.f\,(f\,x))\,n
-\end{align*}
+\[
+((\lambda m. \lambda n. m \, n) \, (\lambda f. \lambda x. f \, (f \, x))) \, (\lambda f. \lambda x. f \, (f \, (f \, x)))
+\]
 
-\textbf{Step 2:}
-\begin{align*}
-\lambda n.(\lambda f.\lambda x.f\,(f\,x))\,n\,(\lambda f.\lambda x.f\,(f\,(f\,x))) &\rightarrow (\lambda f.\lambda x.f\,(f\,x))\,(\lambda f.\lambda x.f\,(f\,(f\,x)))
-\end{align*}
+\subsection*{Solution}
 
-\textbf{Step 3:} 
-\[ \lambda x.((\lambda f.\lambda x.f\,(f\,(f\,x))))\,((\lambda f.\lambda x.f\,(f\,(f\,x)))\,x) \]
+\paragraph{Step-by-Step Beta Reduction:}
 
-\begin{align*}
-(\lambda f.\lambda x.f\,(f\,x))\,(\lambda f.\lambda x.f\,(f\,(f\,x))) &\rightarrow \lambda x.[(\lambda f.\lambda x.f\,(f\,(f\,x)))]\,((\lambda f.\lambda x.f\,(f\,(f\,x)))\,x)
-\end{align*}
+We start with the given expression:
+\[
+((\lambda m. \lambda n. m \, n) \, (\lambda f. \lambda x. f \, (f \, x))) \, (\lambda f. \lambda x. f \, (f \, (f \, x)))
+\]
 
-\textbf{Step 4:}
-\begin{align*}
-(\lambda f.\lambda x.f\,(f\,(f\,x)))\,x &\rightarrow \lambda x.x\,(x\,(x\,x))
-\end{align*}
+1. Apply \((\lambda m. \lambda n. m \, n)\) to \((\lambda f. \lambda x. f \, (f \, x))\):
+\[
+(\lambda n. ((\lambda f. \lambda x. f \, (f \, x)) \, n))
+\]
 
-\begin{align*}
-(\lambda f.\lambda x.f\,(f\,(f\,x)))\,x &\rightarrow x\,(x\,(x\,x))
-\end{align*}
+2. Apply the result to \((\lambda f. \lambda x. f \, (f \, (f \, x)))\):
+\[
+((\lambda f. \lambda x. f \, (f \, x)) \, (\lambda f. \lambda x. f \, (f \, (f \, x))))
+\]
 
-\textbf{Step 5:}
-\[ \lambda x.((\lambda f.\lambda x.f\,(f\,(f\,x))))\,(x\,(x\,(x\,x))) \]
+3. Substitute \((\lambda f. \lambda x. f \, (f \, (f \, x)))\) for \(f\) in \((\lambda x. f \, (f \, x))\):
+\[
+\lambda x. ((\lambda f. \lambda x. f \, (f \, (f \, x))) \, ((\lambda f. \lambda x. f \, (f \, (f \, x))) \, x))
+\]
 
-\textbf{Step 6:} 
-\[ \lambda x.(x\,(x\,(x\,x)))\,(x\,(x\,(x\,x))\,x) \]
+4. Continue substitution and simplification. This corresponds to function application in Church numerals:
+\[
+\lambda x. f (f (f (f (f (f (f (f (f x))))))))
+\]
 
-\textbf{Step 7:} 
-\[ \lambda x.(x\,(x\,(x\,x)))\,(x\,(x\,(x\,x\,x))) \]
+The result is the Church numeral \(9\):
+\[
+\lambda f. \lambda x. f (f (f (f (f (f (f (f (f \, x))))))))
+\]
 
-the function is applying $x$ six times, which corresponds to the Church numeral 6.
+\paragraph{Semantic Meaning:}
 
+The term \((\lambda m. \lambda n. m \, n)\) implements a function on Church numerals that corresponds to \textbf{exponentiation with reversed arguments}. Given two Church numerals \(m\) and \(n\) representing natural numbers \(M\) and \(N\), the term \(m \, n\) corresponds to \(N^M\).
 
-\subsubsection*{Question 2:}
+For this specific case:
 
-Explain what function on natural numbers $\lambda m.\lambda n.m\,n$ implements.
+- \(m = \lambda f. \lambda x. f \, (f \, x)\), which is the Church numeral \(2\) (representing \(2\)).
+- \(n = \lambda f. \lambda x. f \, (f \, (f \, x))\), which is the Church numeral \(3\) (representing \(3\)).
 
-\subsection*{Answer:}
-The lambda term $\lambda m.\lambda n.m\,n$ represents the multiplication operation in Church numerals.
-
-\textbf{Explanation:}
-In Church encoding, natural numbers are represented as repeated applications of a function. The numeral $n$ is encoded as $\lambda f.\lambda x.f^n\,x$. The term $m\,n$ applies the function $m$ to $n$. Since $m$ represents applying a function $f$ $m$ times, and $n$ represents applying $f$ $n$ times, their composition results in $m \times n$ applications of $f$. Therefore, $\lambda m.\lambda n.m\,n$ takes two Church numerals and returns their product.
-
+Thus, \((m \, n) = (2 \, 3)\), which represents \(3^2 = 9\).
 \subsubsection*{Question for Discord:}
 Is it possible to represent data structures like pairs or lists using Church numerals and lambda calculus? If so, how do these representations work?
 
@@ -776,12 +775,13 @@ Unique Normal Forms: No
   \hline
   False & False & False & 
   \begin{tikzcd}
-  a \arrow[r] & b \arrow[r] & c \arrow[ll, bend left]
+    & a \arrow[ld] \arrow[rd] & \\
+    b \arrow[loop left]{} & & c \arrow[loop right]{}
   \end{tikzcd} \\
   \hline
   \end{tabular}
   \end{center}
-
+  
 \textbf{Question on Discord:} Why is it impossible to have an ARS that is both Confluent and Terminating but does not have Unique Normal Forms?
 
 
@@ -899,43 +899,124 @@ plus rules saying that the order of letters does not matter. Starting from \( 15
 
 \subsection*{Solution}
 
-1. \textbf{Invariant:}  
-   A helpful approach is to use an invariant that remains unchanged under the rewrite rules. By analyzing the given rules:  
-   \begin{itemize}
-       \item \( ab \to cc \): reduces \( a + b \), increases \( c \) by \( +2 \).
-       \item \( ac \to bb \): reduces \( a + c \), increases \( b \) by \( +2 \).
-       \item \( bc \to aa \): reduces \( b + c \), increases \( a \) by \( +2 \).
-   \end{itemize}
-   The total number of letters \( f(a, b, c) = a + b + c \) remains constant under all rules.
+\textbf{Goal:} We want to determine if we can reach a configuration where we have only one type of letter from the initial configuration:  
+\[
+a = 15, \quad b = 14, \quad c = 13.
+\]
 
-   Initial value:
-   \[
-   f(15, 14, 13) = 15 + 14 + 13 = 42.
-   \]
+\textbf{Step 1: Total Letter Count Invariant}
 
-   Therefore, \( 42 \) letters must be preserved at all times.
+First, observe that all rules preserve the total number of letters:
+\[
+ab \to cc \implies a+b+c \to (a-1)+(b-1)+(c+2) = a+b+c,
+\]
+\[
+ac \to bb \implies a+c+b \to (a-1)+(c-1)+(b+2) = a+b+c,
+\]
+\[
+bc \to aa \implies b+c+a \to (b-1)+(c-1)+(a+2) = a+b+c.
+\]
 
-2. \textbf{Parity Analysis:}  
-   Under each rule:
-   \begin{itemize}
-       \item \( ab \to cc \): The count of \( a + b + c \) remains unchanged.
-       \item \( ac \to bb \): Similarly, parity does not change.
-       \item \( bc \to aa \): Again, parity does not change.
-   \end{itemize}
+Since we start with \(15+14+13=42\) letters, any reachable configuration must also have \(42\) letters in total.
 
-   Since the initial counts of \( a \), \( b \), and \( c \) are \( 15, 14, 13 \) respectively (all odd or even), parity is preserved.
+\textbf{Step 2: Differences as Invariants Modulo 3}
 
-To reach a state where only one type of letter (\( a \), \( b \), or \( c \)) remains:
-\begin{itemize}
-    \item At least one letter type must dominate entirely while the other two reduce to zero.
-    \item However, the rules \( ab \to cc \), \( ac \to bb \), and \( bc \to aa \) always generate new letters of the other two types.
-\end{itemize}
-It is impossible to reach a state containing only \( a \)'s, \( b \)'s, or \( c \)'s because the system keeps ``mixing'' types.
+Consider the differences:
+\[
+a - b, \quad b - c, \quad c - a.
+\]
 
----
+Let’s check how each rule affects these differences:
 
-\subsubsection*{Conclusion}
-Starting from \( 15a \), \( 14b \), \( 13c \), it is not possible to reduce the configuration to only \( a \)'s, \( b \)'s, or \( c \)'s. The invariant \( f(a, b, c) = 42 \) and the parity analysis confirm this result.
+- For \(ab \to cc\):  
+  \[
+  (a,b,c) \to (a-1,b-1,c+2).
+  \]  
+  Thus:
+  \[
+  a-b \to (a-1)-(b-1) = a-b,
+  \]
+  \[
+  b-c \to (b-1)-(c+2) = (b-c)-3,
+  \]
+  \[
+  c-a \to (c+2)-(a-1) = (c-a)+3.
+  \]
+
+- For \(ac \to bb\):  
+  \[
+  (a,b,c) \to (a-1,b+2,c-1).
+  \]  
+  Thus:
+  \[
+  a-b \to (a-1)-(b+2) = (a-b)-3,
+  \]
+  \[
+  b-c \to (b+2)-(c-1) = (b-c)+3,
+  \]
+  \[
+  c-a \to (c-1)-(a-1) = c-a.
+  \]
+
+- For \(bc \to aa\):  
+  \[
+  (a,b,c) \to (a+2,b-1,c-1).
+  \]  
+  Thus:
+  \[
+  a-b \to (a+2)-(b-1) = (a-b)+3,
+  \]
+  \[
+  b-c \to (b-1)-(c-1) = b-c,
+  \]
+  \[
+  c-a \to (c-1)-(a+2) = (c-a)-3.
+  \]
+
+Notice that each rule only changes these differences by multiples of 3. Therefore, the values of \((a-b) \mod 3\), \((b-c) \mod 3\), and \((c-a) \mod 3\) are \emph{invariants}—they do not change under any of the rewrite steps.
+
+\textbf{Checking the Initial Configuration}
+
+Initially:
+\[
+a=15, \quad b=14, \quad c=13.
+\]
+Compute the differences modulo 3:
+\[
+a-b = 15-14 = 1 \equiv 1 \ (\mathrm{mod}\ 3),
+\]
+\[
+b-c = 14-13 = 1 \equiv 1 \ (\mathrm{mod}\ 3),
+\]
+\[
+c-a = 13-15 = -2 \equiv 1 \ (\mathrm{mod}\ 3) \quad \text{(since } -2 \equiv 1 \mod 3\text{)}.
+\]
+
+Thus, initially:
+\[
+(a-b) \mod 3 = 1, \quad (b-c) \mod 3 = 1, \quad (c-a) \mod 3 = 1.
+\]
+
+\textbf{Contradiction with Final Desired Configurations}
+
+Suppose we could reach a configuration of only \(a\)'s. Then:
+\[
+a = 42, \quad b = 0, \quad c = 0.
+\]
+In this case:
+\[
+a-b = 42 - 0 = 42 \equiv 0 \ (\mathrm{mod}\ 3),
+\]
+\[
+b-c = 0 - 0 = 0 \equiv 0 \ (\mathrm{mod}\ 3),
+\]
+\[
+c-a = 0 - 42 = -42 \equiv 0 \ (\mathrm{mod}\ 3).
+\]
+
+This would give us \((a-b,b-c,c-a) \equiv (0,0,0) \mod 3\), which does not match our invariant \((1,1,1)\). Therefore, it is impossible to end up with only \(a\)'s.
+
+By symmetry, the same contradiction arises if we try to end up with only \(b\)'s or only \(c\)'s. Any single-type configuration would yield differences that are all \(0 \mod 3\), which is inconsistent with our invariant.
 
 
 
@@ -949,7 +1030,7 @@ How could introducing invariants based on patterns (e.g., tracking the balance o
 The assignments helped me see how ideas from computer science theory connect to real world uses. 
 We used Lean to prove basic math rules that we often take for granted. Including: Reflexivity
 (showing that something equals itself), Commutativity (showing that the order doesn't matter, 
-like 2+3 = 3+2), andAssociativity (showing that grouping doesn't matter, like (1+2)+3 = 1+(2+3))
+like 2+3 = 3+2), and Associativity (showing that grouping doesn't matter, like (1+2)+3 = 1+(2+3))
 Lean has special commands that help prove these rules step by step. For instance, when we need 
 to prove that addition is associative, we used a method called induction - which is like proving 
 that if something works for the first number, then showing that if it works for one number, it 
